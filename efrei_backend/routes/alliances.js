@@ -7,19 +7,29 @@ router.get('/',function(req,res,next){
 var id=parseInt(req.params.id);
 AllianceDAO.getAll()
 .then((alliances)=>{
-res.send(alliances);
-
-});
+res.status(200).send({ status: 'success', alliances: alliances });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
 });
 
 
 router.get('/:id',function(req,res,next){
 var id=parseInt(req.params.id);
 AllianceDAO.getById(id)
-.then((allicance)=>{
-res.send(alliance);
-res.sendStatus(200);
-});
+.then((alliance)=>{
+res.status(200).send({ status: 'success', alliance: alliance });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
 });
 
 
@@ -27,27 +37,56 @@ res.sendStatus(200);
 router.post('/', function(req, res) {
     var alliance_name = req.body.alliance.name;
 
-	AllianceDAO.createAlliance(alliance_name);
-res.sendStatus(200);
-});
 
-router.delete('/:id', function(req, res){
-var id= parrseInt(req.params.id); 
-AllianceDAO.deleteAlliance(id)
+AllianceDAO.insertAlliance(alliance_name)
 .then((alliance)=>{
-    res.send(alliance); 
-    res.sendStatus(200); 
-});
-}); 
 
-router.put('/:id', function(req, res){
-    var alliance_name = req.body.alliance.name; 
-	var alliance_id=	req.body.alliance.id;
-    AllianceDAO.updateAlliance(alliance_name,alliance_id)
-    .then((alliance)=>{
-        res.send(alliance); 
-        res.sendStatus(200); 
-    });
+res.status(200).send({ status: 'success',message:'Inserted one alliance', alliance: alliance });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
+
 });
 
-module.exports = router
+
+router.put('/:id', function(req, res) {
+	var alliance_id=parseInt(req.params.id);
+    var alliance_name = req.body.alliance.name;
+
+
+AllianceDAO.updateAlliance(alliance_id,alliance_name)
+.then((alliance)=>{
+
+res.status(200).send({ status: 'success',message:'modified an alliance', alliance: alliance });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
+
+});
+
+router.delete('/:id', function(req, res) {
+	var alliance_id=parseInt(req.params.id);
+
+AllianceDAO.deleteAlliance(alliance_id)
+.then((alliance)=>{
+
+res.status(200).send({ status: 'success',message:'deleted an alliance' });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
+
+});
+
+module.exports = router;
