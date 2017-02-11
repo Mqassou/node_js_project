@@ -8,7 +8,7 @@ return DB.accessor.query('SELECT * FROM characters WHERE id=$[idCharacter]', {
 	})
 	.then((result)=>
 	{
-	
+	result=result[0];
 	return result
 	})
 	.catch((error)=>{
@@ -20,6 +20,7 @@ return DB.accessor.query('SELECT * FROM characters WHERE id=$[idCharacter]', {
 getAll(){
 return DB.accessor.query('SELECT * FROM characters')
 	.then((result)=>{
+
 	return result
 	})
 	.catch((error)=>{

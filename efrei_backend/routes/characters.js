@@ -4,7 +4,6 @@ var router = express.Router();
 
 
 router.get('/',function(req,res,next){
-var id=parseInt(req.params.id);
 CharacterDAO.getAll()
 .then((characters)=>{
 res.status(200).send({ status: 'success', characters: characters });
@@ -84,7 +83,7 @@ router.delete('/:id', function(req, res) {
 CharacterDAO.deleteCharacter(character_id)
 .then((character)=>{
 
-res.status(200).send({ status: 'success',message:'deleted a character' });
+res.status(200).send({ status: 'success',message:[]	 });
 })
 .catch((error)=>
 	res.status(500)

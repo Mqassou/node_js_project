@@ -8,7 +8,7 @@ return DB.accessor.query('SELECT * FROM alliances WHERE id=$[idAlliance]', {
 	})
 	.then((result)=>
 	{
-	
+	result=result[0];
 	return result
 	})
 	.catch((error)=>{
@@ -20,6 +20,7 @@ return DB.accessor.query('SELECT * FROM alliances WHERE id=$[idAlliance]', {
 getAll(){
 return DB.accessor.query('SELECT * FROM alliances')
 	.then((result)=>{
+ 
 	return result
 	})
 	.catch((error)=>{

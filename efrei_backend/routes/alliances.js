@@ -4,7 +4,7 @@ var router = express.Router();
 
 
 router.get('/',function(req,res,next){
-var id=parseInt(req.params.id);
+
 AllianceDAO.getAll()
 .then((alliances)=>{
 res.status(200).send({ status: 'success', alliances: alliances });
@@ -61,7 +61,7 @@ router.put('/:id', function(req, res) {
 AllianceDAO.updateAlliance(alliance_id,alliance_name)
 .then((alliance)=>{
 
-res.status(200).send({ status: 'success',message:'modified an alliance', alliance: alliance });
+res.status(200).send({ status: 'success',message:'modified a alliance', alliance: alliance });
 })
 .catch((error)=>
 	res.status(500)
@@ -78,7 +78,7 @@ router.delete('/:id', function(req, res) {
 AllianceDAO.deleteAlliance(alliance_id)
 .then((alliance)=>{
 
-res.status(200).send({ status: 'success',message:'deleted an alliance' });
+res.status(200).send({ status: 'success',message:[]	 });
 })
 .catch((error)=>
 	res.status(500)

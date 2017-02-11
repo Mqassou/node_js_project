@@ -4,7 +4,6 @@ var router = express.Router();
 
 
 router.get('/',function(req,res,next){
-var id=parseInt(req.params.id);
 UserDAO.getAll()
 .then((users)=>{
 res.status(200).send({ status: 'success', users: users });
@@ -80,7 +79,7 @@ router.delete('/:id', function(req, res) {
 UserDAO.deleteUser(user_id)
 .then((user)=>{
 
-res.status(200).send({ status: 'success',message:'deleted a user' });
+res.status(200).send({ status: 'success',message:[]	 });
 })
 .catch((error)=>
 	res.status(500)
