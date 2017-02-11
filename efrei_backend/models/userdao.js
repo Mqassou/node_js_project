@@ -1,4 +1,4 @@
-const DB =require('../models/database');
+const DB =require('../models/Database');
 
 module.exports={
 getById(id){
