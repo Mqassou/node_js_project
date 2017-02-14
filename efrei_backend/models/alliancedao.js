@@ -74,6 +74,44 @@ return DB.accessor.query('DELETE FROM alliances WHERE id =${alliance_id} ', {
 	})
 	
 
+},
+
+  ///////////////////////////////////////////////////////////////////
+ //////////////////////// ROUTES AVANCEES //////////////////////////
+///////////////////////////////////////////////////////////////////
+getUsersOfTheAlliance(id){
+
+return DB.accessor.query('SELECT * FROM USERS WHERE alliance_id=$[idAlliance]  ', {
+    idAlliance: id
+	})
+	.then((result)=>
+	{
+	
+	return result
+	})
+	.catch((error)=>{
+	throw error
+	})
+	
+	
+},
+
+getCharactersOfTheAlliance(id){
+
+return DB.accessor.query('SELECT C.id, C.name, C.user_id, C.class, C.position FROM CHARACTERS C LEFT JOIN  USERS U on C.user_id=U.id WHERE U.alliance_id=$[idAlliance]  ', {
+    idAlliance: id
+	})
+	.then((result)=>
+	{
+	
+	return result
+	})
+	.catch((error)=>{
+	throw error
+	})
+	
+	
 }
+
 }
 

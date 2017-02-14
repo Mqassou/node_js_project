@@ -90,4 +90,23 @@ res.status(200).send({ status: 'success',message:[]	 });
 
 });
 
+  ///////////////////////////////////////////////////////////////////
+ //////////////////////// ROUTES AVANCEES //////////////////////////
+///////////////////////////////////////////////////////////////////
+
+router.get('/:id/characters',function(req,res,next){
+var id=parseInt(req.params.id);
+UserDAO.getCharactersOfTheUser(id)
+.then((characters)=>{
+res.status(200).send({ status: 'success', characters: characters });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
+});
+
+
 module.exports = router;

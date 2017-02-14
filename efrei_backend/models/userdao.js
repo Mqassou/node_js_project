@@ -77,6 +77,26 @@ return DB.accessor.query('DELETE FROM users WHERE id =${user_id} ', {
 	})
 	
 
+},
+ ///////////////////////////////////////////////////////////////////
+ //////////////////////// ROUTES AVANCEES //////////////////////////
+///////////////////////////////////////////////////////////////////
+
+getCharactersOfTheUser(id){
+
+return DB.accessor.query('SELECT  C.id, C.name, C.user_id, C.class, C.position FROM CHARACTERS C LEFT JOIN  USERS U on C.user_id=U.id WHERE U.id=$[idUser]  ', {
+    idUser: id
+	})
+	.then((result)=>
+	{
+	
+	return result
+	})
+	.catch((error)=>{
+	throw error
+	})
+	
+	
 }
 }
 
