@@ -98,4 +98,48 @@ res.status(200).send({ status: 'success',message:[]	 });
   ///////////////////////////////////////////////////////////////////
  //////////////////////// ROUTES AVANCEES //////////////////////////
 ///////////////////////////////////////////////////////////////////
+router.get('/all/:class',function(req,res,next){
+var _class=req.params.class;
+CharacterDAO.getCharactersByClass(_class)
+.then((characters)=>{
+res.status(200).send({ status: 'success', characters: characters });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
+});
+
+
+router.get('/:id/allies/:radius',function(req,res,next){
+var radius=req.params.radius;
+var id=parseInt(req.params.id);
+CharacterDAO.getAlliesRadius(id,radius)
+.then((characters)=>{
+res.status(200).send({ status: 'success', characters: characters });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
+});
+
+router.get('/:id/ennemies/:radius',function(req,res,next){
+var radius=req.params.radius;
+var id=parseInt(req.params.id);
+CharacterDAO.getEnnemiesRadius(id,radius)
+.then((characters)=>{
+res.status(200).send({ status: 'success', characters: characters });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
+});
 module.exports = router;

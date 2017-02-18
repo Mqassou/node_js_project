@@ -119,6 +119,22 @@ res.status(200).send({ status: 'success', characters: characters });
 			}));
 });
 
+router.get('/:id/characters/:class',function(req,res,next){
+var _class=req.params.class;
+var id=parseInt(req.params.id);
+AllianceDAO.getCharactersByAllianceAndClass(id,_class)
+.then((characters)=>{
+res.status(200).send({ status: 'success', characters: characters });
+})
+.catch((error)=>
+	res.status(500)
+		.json({
+			status:'Error',
+			message:error
+			}));
+});
+
+
 
 
 

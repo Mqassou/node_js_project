@@ -81,6 +81,47 @@ return DB.accessor.query('DELETE FROM characters WHERE id =${character_id} ', {
 	})
 	
 
+},
+  ///////////////////////////////////////////////////////////////////
+ //////////////////////// ROUTES AVANCEES //////////////////////////
+///////////////////////////////////////////////////////////////////
+getCharactersByClass(_class)
+{
+return DB.accessor.query('SELECT * FROM CHARACTERS WHERE class =${character_class} ', {
+	character_class:_class
+
+	})
+	.catch((error)=>{
+	throw error
+	})
+	
+
+},
+
+getAlliesRadius(id,_radius)
+{
+// earth radius : 6371 km
+return DB.accessor.query('SELECT id,name,user_id,class,position  FROM ( SELECT C.id,C.name,C.user_id,C.class,C.position , (acos((sin(radians((SELECT position[0] FROM CHARACTERS WHERE id=${character_id})))*sin(radians(position[0])) ) + (cos(radians((SELECT position[0] FROM CHARACTERS WHERE id=${character_id}))) *cos(radians(position[0]))*cos(radians(position[1])-radians((SELECT position[1] FROM CHARACTERS WHERE id=${character_id}))) )) * 6371000) As D    FROM   CHARACTERS C LEFT JOIN  USERS U  on C.user_id=U.id  WHERE U.alliance_id=(SELECT alliance_id FROM USERS U LEFT JOIN CHARACTERS C ON C.user_id=U.id  WHERE C.id=${character_id})	  )as t  WHERE t.D<${radius} and t.id!=${character_id} ', {
+	character_id:id,
+	radius:_radius
+	})
+	.catch((error)=>{
+	throw error
+	})
+},
+
+getEnnemiesRadius(id,_radius)
+{
+return DB.accessor.query('SELECT id,name,user_id,class,position  FROM ( SELECT C.id,C.name,C.user_id,C.class,C.position , (acos((sin(radians((SELECT position[0] FROM CHARACTERS WHERE id=${character_id})))*sin(radians(position[0])) ) + (cos(radians((SELECT position[0] FROM CHARACTERS WHERE id=${character_id}))) *cos(radians(position[0]))*cos(radians(position[1])-radians((SELECT position[1] FROM CHARACTERS WHERE id=${character_id}))) )) * 6371000) As D    FROM   CHARACTERS C LEFT JOIN  USERS U  on C.user_id=U.id  WHERE U.alliance_id!=(SELECT alliance_id FROM USERS U LEFT JOIN CHARACTERS C ON C.user_id=U.id  WHERE C.id=${character_id})	  )as t  WHERE t.D<${radius} and t.id!=${character_id} ORDER BY t.D',{
+	character_id:id,
+	radius:_radius
+
+	})
+	.catch((error)=>{
+	throw error
+	 })
 }
+
+
 }
 
