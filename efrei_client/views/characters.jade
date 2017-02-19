@@ -1,0 +1,15 @@
+extends layout
+block content
+	h1   characters :
+	table
+	
+		each character in characters
+				tr
+					td
+						a(href='/characters/'+character.id)=character.name
+					td=character.id
+					td=character.name
+					td=character.user_id
+					td=character.class
+					td=character.position.x
+					td=character.position.y

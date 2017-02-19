@@ -1,0 +1,11 @@
+extends layout
+block content
+	h1  character :
+	table
+				tr
+					td=character.id
+					td=character.name
+					td=character.user_id
+					td=character.class
+					td=character.position.x
+					td=character.position.y

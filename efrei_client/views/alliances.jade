@@ -1,0 +1,6 @@
+extends layout
+block content
+	h1  alliances :
+	each alliance in alliances
+		a(href='/alliances/'+alliance.id)=alliance.name
+		br
