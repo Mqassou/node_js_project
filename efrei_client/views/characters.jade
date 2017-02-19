@@ -1,7 +1,17 @@
 extends layout
 block content
-	h1   characters :
-	table
+	h1 
+		a(href='http://localhost:3001') Accueil
+	h2   Characters :
+	table(border='1')
+		tr
+			td	profil
+			td	id
+			td	name
+			td	nom	utilisateur
+			td	class
+			td	position	x
+			td	position	y
 	
 		each character in characters
 				tr

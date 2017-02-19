@@ -1,4 +1,15 @@
 extends layout
 block content
-	h1 Alliance :
-		h2= alliance.name
+	h1 
+		a(href='http://localhost:3001') Accueil
+	h2  Alliance :
+		table(border='1')
+			tr
+				td	id
+				td	nom	alliance
+
+
+					tr
+						td=alliance.id
+						td
+							a(href='/alliances/'+alliance.id)=alliance.name

@@ -1,7 +1,14 @@
 extends layout
 block content
-	h1  user :
-	table
+	h1 
+		a(href='http://localhost:3001') Accueil
+	h2  User :
+	table(border='1')
+		tr
+			td	id
+			td	name
+			td	email
+			td	nom	alliance
 				tr
 					td=user.id
 					td=user.name
